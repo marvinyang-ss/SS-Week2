@@ -109,6 +109,7 @@ public class UpdateFlightView implements View {
 			departureDate = LocalDate.parse(scanner.nextLine());
 		} catch (Exception e) {
 			departureDate = flight.getDepartureTime().toLocalDate();
+			System.out.println("No change was made.");
 		}
 
 		// Get Departure Time
@@ -118,6 +119,7 @@ public class UpdateFlightView implements View {
 			departureTime = LocalTime.parse(scanner.nextLine());
 		} catch (Exception e) {
 			departureTime = flight.getDepartureTime().toLocalTime();
+			System.out.println("No change was made.");
 		}
 		
 		// Get Departure DateTime
@@ -130,6 +132,7 @@ public class UpdateFlightView implements View {
 			reservedSeats = scanner.nextInt();
 		} catch (Exception e) {
 			reservedSeats = flight.getReservedSeats();
+			System.out.println("No change was made.");
 		}
 		flight.setReservedSeats(reservedSeats);
 
@@ -141,6 +144,7 @@ public class UpdateFlightView implements View {
 			seatPrice = scanner.nextFloat();
 		} catch (Exception e) {
 			seatPrice = flight.getSeatPrice();
+			System.out.println("No change was made.");
 		}
 		flight.setSeatPrice(seatPrice);
 
@@ -149,7 +153,7 @@ public class UpdateFlightView implements View {
 			System.out.println(service.updateFlight(flight));
 			System.out.println();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Could not update flight.");
 		}
 
 		new FlightsMenu().display(scanner);

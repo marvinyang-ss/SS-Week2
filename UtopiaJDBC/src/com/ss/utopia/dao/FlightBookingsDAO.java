@@ -37,7 +37,11 @@ public class FlightBookingsDAO extends BaseDAO<FlightBookings> {
 	 * @throws SQLException
 	 */
 	public FlightBookings readFlightBookingsById(Integer flightId, Integer bookingId) throws SQLException {
-		return read("SELECT * FROM flight_bookings WHERE flight_id = ? AND booking_id = ?", new Object[] {flightId, bookingId}).get(0);
+		List<FlightBookings> flightBookings = read("SELECT * FROM flight_bookings WHERE flight_id = ? AND booking_id = ?", new Object[] {flightId, bookingId});
+		if (flightBookings.size() == 0) {
+			return null;
+		}
+		return flightBookings.get(0);
 	}
 	
 	/**

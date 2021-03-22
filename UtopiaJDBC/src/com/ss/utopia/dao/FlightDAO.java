@@ -38,7 +38,11 @@ public class FlightDAO extends BaseDAO<Flight> {
 	 * @throws SQLException
 	 */
 	public Flight readFlightById(Integer id) throws SQLException {
-		return read("SELECT * FROM flight WHERE id = ?", new Object[] {id}).get(0);
+		List<Flight> flights = read("SELECT * FROM flight WHERE id = ?", new Object[] {id});
+		if (flights.size() == 0) {
+			return null;
+		}
+		return flights.get(0);
 	}
 	
 	/**

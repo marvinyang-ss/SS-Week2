@@ -37,7 +37,11 @@ public class BookingPaymentDAO extends BaseDAO<BookingPayment> {
 	 * @throws SQLException
 	 */
 	public BookingPayment readBookingPaymentById(Integer bookingId) throws SQLException {
-		return read("SELECT * FROM booking_payment WHERE booking_id = ?", new Object[] {bookingId}).get(0);
+		List<BookingPayment> bookingPayments = read("SELECT * FROM booking_payment WHERE booking_id = ?", new Object[] {bookingId});
+		if (bookingPayments.size() == 0) {
+			return null;
+		}
+		return bookingPayments.get(0);
 	}
 	
 	/**

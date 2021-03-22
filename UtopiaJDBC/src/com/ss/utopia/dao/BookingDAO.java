@@ -37,7 +37,11 @@ public class BookingDAO extends BaseDAO<Booking> {
 	 * @throws SQLException
 	 */
 	public Booking readBookingById(Integer id) throws SQLException {
-		return read("SELECT * FROM booking WHERE id = ?", new Object[] {id}).get(0);
+		List<Booking> bookings = read("SELECT * FROM booking WHERE id = ?", new Object[] {id});
+		if (bookings.size() == 0) {
+			return null;
+		}
+		return bookings.get(0);
 	}
 	
 	/**

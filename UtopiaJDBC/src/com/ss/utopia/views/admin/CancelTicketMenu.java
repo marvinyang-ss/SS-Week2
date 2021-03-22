@@ -25,6 +25,7 @@ public class CancelTicketMenu extends Menu {
 		try {
 			bookings = service.readAllBookings().stream().filter(booking -> booking.getIsActive()).collect(Collectors.toList());
 			bookings.forEach(booking -> options.add("Booking Id: " + booking.getId() + ", Active: " + booking.getIsActive()));
+			options.add("Quit to previous");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -35,6 +36,9 @@ public class CancelTicketMenu extends Menu {
 		System.out.println("Choose a Ticket to cancel");
 		displayOptions();
 		Integer selectedIndex = getOptionChoice(scanner) - 1;
+		if (selectedIndex+1 == options.size()) {
+			new AdminMenu().display(scanner);;
+		}
 		Booking selectedBooking = bookings.get(selectedIndex);
 		selectedBooking.setIsActive(false);
 		try {

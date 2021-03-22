@@ -37,7 +37,11 @@ public class UserRoleDAO extends BaseDAO<UserRole> {
 	 * @throws SQLException
 	 */
 	public UserRole readUserRoleById(Integer id) throws SQLException {
-		return read("SELECT * FROM user_role WHERE id = ?", new Object[] {id}).get(0);
+		List<UserRole> userRoles = read("SELECT * FROM user_role WHERE id = ?", new Object[] {id});
+		if (userRoles.size() == 0) {
+			return null;
+		}
+		return userRoles.get(0);
 	}
 	
 	/**
@@ -47,7 +51,11 @@ public class UserRoleDAO extends BaseDAO<UserRole> {
 	 * @throws SQLException
 	 */
 	public UserRole readUserRoleByName(String name) throws SQLException {
-		return read("SELECT * FROM user_role WHERE name = ?", new Object[] {name}).get(0);
+		List<UserRole> userRoles = read("SELECT * FROM user_role WHERE name = ?", new Object[] {name});
+		if (userRoles.size() == 0) {
+			return null;
+		}
+		return userRoles.get(0);
 	}
 	
 	/**

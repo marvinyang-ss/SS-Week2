@@ -60,6 +60,7 @@ public class UpdateFlightView implements View {
 				updatedRoute.setOrigin(newOrigin);
 			} catch (SQLException e) {
 				e.printStackTrace();
+				System.out.println("Airport does not exist.");
 			}
 		}
 
@@ -125,12 +126,8 @@ public class UpdateFlightView implements View {
 			flight.setDepartureTime(updatedDepartureTime);
 			String message = service.updateFlight(flight);
 			System.out.println(message);
-		} catch (IndexOutOfBoundsException e) {
-			e.printStackTrace();
-			System.out.println("There is no route from " + updatedRoute.getOrigin().getId() + " to " + updatedRoute.getDestination().getId());
-		} catch (SQLException e) {
-			e.printStackTrace();
-			System.out.println("Failed to update flight");
+		} catch (Exception e) {
+			System.out.println("Failed to update flight.");
 		}
 
 		System.out.println();

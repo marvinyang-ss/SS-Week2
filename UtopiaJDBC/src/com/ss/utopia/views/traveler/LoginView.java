@@ -4,10 +4,13 @@
 package com.ss.utopia.views.traveler;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import com.ss.utopia.entity.User;
 import com.ss.utopia.service.TravelerService;
+import com.ss.utopia.views.MainMenu;
+import com.ss.utopia.views.Menu;
 import com.ss.utopia.views.View;
 
 /**
@@ -39,6 +42,22 @@ public class LoginView implements View {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+			}
+			
+			Menu tryAgainMenu = new Menu(Arrays.asList("Yes", "No")) {
+				@Override
+				public void display(Scanner scanner) {
+					System.out.println("Try Again?");
+					displayOptions();
+				}
+			};
+			tryAgainMenu.display(scanner);
+			Integer input = tryAgainMenu.getOptionChoice(scanner);
+			if (input == 2) {
+				new MainMenu().display(scanner);
+				break;
+			} else {
+				scanner.nextLine();
 			}
 		}
 	}

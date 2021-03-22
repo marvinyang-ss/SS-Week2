@@ -106,8 +106,8 @@ public class AddFlightView implements View {
 			// Add Flight
 			System.out.println(service.addFlight(newFlight));
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("Could not add flight");
+			System.out.println("Invalid input.");
+			System.out.println("Could not add flight.");
 		} finally {
 			System.out.println();
 			new FlightsMenu().display(scanner);

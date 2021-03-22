@@ -36,8 +36,12 @@ public class RouteDAO extends BaseDAO<Route> {
 	 * @return
 	 * @throws SQLException
 	 */
-	public Route readRouteById(Integer id) throws SQLException, IndexOutOfBoundsException {
-		return read("SELECT * FROM route WHERE id = ?", new Object[] {id}).get(0);
+	public Route readRouteById(Integer id) throws SQLException {
+		List<Route> routes = read("SELECT * FROM route WHERE id = ?", new Object[] {id});
+		if (routes.size() == 0) {
+			return null;
+		}
+		return routes.get(0);
 	}
 	
 	/**
@@ -46,8 +50,12 @@ public class RouteDAO extends BaseDAO<Route> {
 	 * @return
 	 * @throws SQLException
 	 */
-	public Route readRouteByAirports(String originId, String destinationId) throws SQLException, IndexOutOfBoundsException {
-		return read("SELECT * FROM route WHERE origin_id = ? AND destination_id = ?", new Object[] {originId, destinationId}).get(0);
+	public Route readRouteByAirports(String originId, String destinationId) throws SQLException {
+		List<Route> routes = read("SELECT * FROM route WHERE origin_id = ? AND destination_id = ?", new Object[] {originId, destinationId});
+		if (routes.size() == 0) {
+			return null;
+		}
+		return routes.get(0);
 	}
 	
 	/**

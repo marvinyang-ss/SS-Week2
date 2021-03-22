@@ -31,7 +31,7 @@ public class AddSeatsView implements View {
 			flight.setReservedSeats(input);
 			service.updateFlight(flight);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Invalid input.\n");
 		}
 		
 		new Employee3Menu(flight).display(scanner);
